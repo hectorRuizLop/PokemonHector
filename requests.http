@@ -1,0 +1,9 @@
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+
+{
+    "FirstName": "AshMayusculas",
+    "LastName": "KetchuMayus",
+    "Email": "ASH@GMAIL.COM", 
+    "Birthdate": "2020-10-20"
+}
