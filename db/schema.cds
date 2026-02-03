@@ -1,4 +1,4 @@
-
+namespace com.pokemon;
 using { cuid, managed } from '@sap/cds/common';
 
 aspect primary : managed, cuid {}
@@ -17,11 +17,12 @@ entity Teams : primary {
     Description : String(255);
     Active : Boolean;
     trainer : Association to Trainers;
+    captures : Composition of many Captures;
 }
 
 entity Captures : primary{
     PokemonName : String;
     Weight : Integer;
     Height : Integer;
-    team : Association To Teams;
+    team : Association to Teams;
 }
