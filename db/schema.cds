@@ -6,8 +6,9 @@ aspect primary : managed, cuid {}
 type Name : String(60);
 
 entity Trainers : primary{
-    Name : Name;
-    Email : String(110);
+    FirstName: String(60);
+    LastName : String(60);
+    @unique Email : String(110);
     Birthdate: Date;
     teams : Composition of many Teams on teams.trainer=$self;
 }
