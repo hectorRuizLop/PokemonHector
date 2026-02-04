@@ -38,3 +38,19 @@ Content-Type: application/json
         }
     ]
 }
+
+###
+GET http://localhost:4004/odata/v4/pokemon/Trainers
+
+###
+GET http://localhost:4004/odata/v4/pokemon/Trainers(00000000-0000-0000-0000-000000011111)?$expand=teams($expand=captures)
+
+###
+PATCH http://localhost:4004/odata/v4/pokemon/Trainers(00000000-0000-0000-0000-000000011111)?$expand=teams($expand=captures)
+Content-Type: application/json
+
+{
+    "LastName": "Not Special",
+    "Email": "notspecialTrainer@gmail.com"
+}
+ 
