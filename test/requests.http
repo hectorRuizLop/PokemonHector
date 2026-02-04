@@ -56,3 +56,39 @@ Content-Type: application/json
  
 ###
 DELETE http://localhost:4004/odata/v4/pokemon/Trainers(00000000-0000-0000-0000-000000011111)
+
+
+
+### Two teams
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+
+{
+    "ID": "00000000-0000-0000-0000-000000111111",
+    "FirstName": "Ash",
+    "LastName": "Twoteams",
+    "Email": "ashteams@gmail.com",
+    "Birthdate": "2000-01-01",
+    "teams": [
+        {
+            "Name": "First Team",
+            "Description": "Water",
+            "Active": true,
+            "captures": [
+                { "PokemonName": "Squirtle", "Weight": 50, "Height": 50 }
+            ]
+        },
+        {
+            "Name": "Second Team",
+            "Description": "Fire",
+            "Active": false,
+            "captures": [
+                { "PokemonName": "Charmander", "Weight": 40, "Height": 50 },
+                { "PokemonName": "Charizard", "Weight": 40, "Height": 50 }
+            ]
+        }
+    ]
+}
+
+###
+GET http://localhost:4004/odata/v4/pokemon/Trainers(00000000-0000-0000-0000-000000111111)?$expand=teams($expand=captures)
