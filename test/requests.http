@@ -54,3 +54,5 @@ Content-Type: application/json
     "Email": "notspecialTrainer@gmail.com"
 }
  
+###
+DELETE http://localhost:4004/odata/v4/pokemon/Trainers(00000000-0000-0000-0000-000000011111)
