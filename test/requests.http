@@ -7,3 +7,34 @@ Content-Type: application/json
     "Email": "ASH@GMAIL.COM", 
     "Birthdate": "2020-10-20"
 }
+
+###
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+
+{
+    "ID": "00000000-0000-0000-0000-000000011111",
+    "FirstName": "Special",
+    "LastName": "Trainer",
+    "Email": "SPECIALTRAINER@GMAIL.COM",
+    "Birthdate": "2000-01-01",
+    "teams": [
+        {
+            "Name": "The team of special trainers",
+            "Description": "This is a very special team",
+            "Active": true,
+            "captures": [
+                {
+                    "PokemonName": "Squirtle",
+                    "Weight": 20,
+                    "Height": 20
+                },
+                {
+                    "PokemonName": "Charizard",
+                    "Weight": 40,
+                    "Height": 40
+                }
+            ]
+        }
+    ]
+}
