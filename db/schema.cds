@@ -16,7 +16,7 @@ entity Trainers : primary{
 entity Teams : primary {
     Name : Name;
     Description : String(255);
-    Active : Boolean;
+    Active : Boolean default true;
     trainer : Association to Trainers;
     captures : Composition of many Captures on captures.team=$self;
 }
