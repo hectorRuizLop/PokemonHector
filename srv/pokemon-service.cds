@@ -10,6 +10,6 @@ service PokemonService {
     entity Captures as projection on my.Captures;
     entity Medals as projection on my.Medals;
     entity TrainerMedals as projection on my.TrainerMedals;
-    entity Locations as projection on my.Locations;
+ 
     entity Gyms as projection on my.Gyms;
 }
