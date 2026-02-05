@@ -141,3 +141,10 @@ GET http://localhost:4004/odata/v4/pokemon/Trainers?$expand=gymBoss
 
 ### Test the medal of the gym
 GET http://localhost:4004/odata/v4/pokemon/Gyms?$expand=medal
+
+
+###
+GET http://localhost:4004/odata/v4/pokemon/PokemonSizes
+
+###
+GET http://localhost:4004/odata/v4/pokemon/TrainerMedalReport
