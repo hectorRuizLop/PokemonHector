@@ -135,3 +135,9 @@ Content-Type: application/json
 
 ### 
 GET http://localhost:4004/odata/v4/pokemon/Medals(951a46af-478b-49bc-abf3-f1bc24fcfd3e)
+
+### Test the boss of the gyms
+GET http://localhost:4004/odata/v4/pokemon/Trainers?$expand=gymBoss
+
+### Test the medal of the gym
+GET http://localhost:4004/odata/v4/pokemon/Gyms?$expand=medal
