@@ -12,6 +12,8 @@ entity Trainers : primary{
     Birthdate: Date;
     teams : Composition of many Teams on teams.trainer=$self;
     trainerMedals : Composition of many TrainerMedals on trainerMedals.trainer = $self;
+    //To see if the trainer is the boss or not
+    gymBoss : Association to one Gyms on gymBoss.Boss = $self;
 }
 
 entity Teams : primary {
@@ -51,7 +53,8 @@ entity Locations : cuid, managed {
 
 entity Gyms : primary { 
     Name : Name;
-    Boss : Association to Trainers;    
+    //A trainer can only be a boss of a gym
+    @unique Boss : Association to Trainers;    
     Type: String(20);    
     medal : Association to Medals; 
     location : Association to Locations;
