@@ -108,3 +108,30 @@ Content-Type: application/json
         }
     ]
 }
+
+### ID CREATED IS: 951a46af-478b-49bc-abf3-f1bc24fcfd3e
+POST http://localhost:4004/odata/v4/pokemon/Medals
+Content-Type: application/json
+
+{
+    "Name": "New Medal"
+}
+
+
+### 
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+
+{
+    "FirstName": "Associated",
+    "LastName": "Trainer",
+    "Email": "AssociatedTrainer@gmail.com",
+    "trainerMedals": [
+        {
+            "medal_ID": "951a46af-478b-49bc-abf3-f1bc24fcfd3e" 
+        }
+    ]
+}
+
+### 
+GET http://localhost:4004/odata/v4/pokemon/Medals(951a46af-478b-49bc-abf3-f1bc24fcfd3e)
