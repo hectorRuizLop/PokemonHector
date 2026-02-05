@@ -46,8 +46,8 @@ entity TrainerMedals {
 
 
 entity Locations : cuid, managed {
-    Latitude : Decimal(10,10);
-    Longitude : Decimal(10,10);
+    Latitude : Decimal(6,3);
+    Longitude : Decimal(6,3);
     City : String(20);
 }
 
