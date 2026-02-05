@@ -11,6 +11,7 @@ entity Trainers : primary{
     @unique Email : String(110);
     Birthdate: Date;
     teams : Composition of many Teams on teams.trainer=$self;
+    trainerMedals : Composition of many TrainerMedals on trainerMedals.trainer = $self;
 }
 
 entity Teams : primary {
@@ -26,4 +27,17 @@ entity Captures : primary{
     Weight : Integer;
     Height : Integer;
     team : Association to Teams;
+}
+
+entity Medals : primary {
+    Name : Name;
+    trainerMedals : Composition of many TrainerMedals on trainerMedals.medal = $self;
+    
+}
+
+
+// Intermediate table for the relation many to many
+entity TrainerMedals {
+    key trainer : Association to Trainers;
+    key medal   : Association to Medals;
 }
