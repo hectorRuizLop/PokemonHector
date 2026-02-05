@@ -32,12 +32,27 @@ entity Captures : primary{
 entity Medals : primary {
     Name : Name;
     trainerMedals : Composition of many TrainerMedals on trainerMedals.medal = $self;
-    
+    gym : Association to Gyms on gym.medal = $self;
 }
 
 
 // Intermediate table for the relation many to many
 entity TrainerMedals {
     key trainer : Association to Trainers;
-    key medal   : Association to Medals;
+    key medal : Association to Medals;
+}
+
+
+entity Locations : cuid, managed {
+    Latitude : Decimal(10,10);
+    Longitude : Decimal(10,10);
+    City : String(20);
+}
+
+entity Gyms : primary { 
+    Name : Name;
+    Boss : Association to Trainers;    
+    Type: String(20);    
+    medal : Association to Medals; 
+    location : Association to Locations;
 }
