@@ -30,22 +30,28 @@ service PokemonService {
     } order by Weight asc; 
 
     @readonly
-    entity TrainerMedalReport as select from my.TrainerMedals as TM {
-        //alias to then compare it
-        key TM.trainer.ID as TrainerID,      
-        TM.trainer.FirstName as TrainerFirstName,
-        TM.trainer.LastName  as TrainerLastName,
+    entity TrainerMedalReport as select from my.TrainerMedals{
+        key trainer.ID as TrainerID,      
+        trainer.FirstName as TrainerFirstName,
+        trainer.LastName  as TrainerLastName,
         
-        TM.medal.Name as MedalName,  
-        TM.medal.gym.Name as GymName,
-        TM.medal.gym.Type as GymType,
-        TM.medal.gym.location.City as GymCity,
-        //first the trainers with more medals
-        (
-            select count(*) 
-            from my.TrainerMedals 
-            where trainer.ID = TM.trainer.ID
-        ) as TotalMedals : Integer
+        count(*) as TotalMedals: Integer 
+    }
+    group by
+        trainer.ID,
+        trainer.FirstName,
+        trainer.LastName
+    order by 
+        TotalMedals desc;
 
-    } order by TotalMedals desc;
+
+    @readonly
+    entity TrainerMedalDetails as select from my.TrainerMedals{
+        key trainer.ID as TrainerID,
+        key medal.ID as MedalID,
+        medal.Name as MedalName,
+        medal.gym.Name as GymName,
+        medal.gym.Type as GymType,
+        medal.gym.location.City as GymCity
+    }
 }
