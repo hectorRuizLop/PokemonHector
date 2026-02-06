@@ -9,14 +9,15 @@ service PokemonService {
     entity Teams as projection on my.Teams;
 
     //This tag is for the new entity PokemonSizes no tell cap what is the official
-    @cds.redirection.target
+    @cds.redirection.target : true
     entity Captures as projection on my.Captures;
     entity Medals as projection on my.Medals;
-    @cds.redirection.target
+    @cds.redirection.target :true
     entity TrainerMedals as projection on my.TrainerMedals;
  
     entity Gyms as projection on my.Gyms;
 
+    @readonly
     entity PokemonSizes as select from my.Captures {
         key ID,
         PokemonName,
@@ -28,6 +29,7 @@ service PokemonService {
         end as SizeLabel : String(10)
     } order by Weight asc; 
 
+    @readonly
     entity TrainerMedalReport as select from my.TrainerMedals as TM {
         //alias to then compare it
         key TM.trainer.ID as TrainerID,      
