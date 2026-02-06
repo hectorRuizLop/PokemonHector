@@ -147,4 +147,12 @@ GET http://localhost:4004/odata/v4/pokemon/Gyms?$expand=medal
 GET http://localhost:4004/odata/v4/pokemon/PokemonSizes
 
 ###
-GET http://localhost:4004/odata/v4/pokemon/TrainerMedalReport
+GET http://localhost:4004/odata/v4/pokemon/TrainerRankings
+
+
+###
+GET http://localhost:4004/odata/v4/pokemon/TrainerMedalDetails
+
+
+
+
