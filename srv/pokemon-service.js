@@ -1,11 +1,8 @@
 const cds = require('@sap/cds')
+const handlers = require('./handlers');
 
-module.exports = cds.service.impl(async function() {
-    const { Trainers } = this.entities
+module.exports = async function (srv) {
 
-    this.before(['CREATE', 'UPDATE'], Trainers, (req) => {
-        if (req.data.Email) {
-            req.data.Email = req.data.Email.toLowerCase()
-        }
-    })
-})
+    this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateEmailDomain);
+
+};

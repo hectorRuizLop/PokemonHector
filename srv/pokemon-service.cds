@@ -1,5 +1,6 @@
 using { com.pokemon as my } from '../db/schema';
 
+
 service PokemonService {
     entity Trainers as projection on my.Trainers{
         *,
