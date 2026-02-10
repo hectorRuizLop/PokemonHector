@@ -1,3 +1,4 @@
+//The email must end with @nubexx.com or @nubexx.es
 async function validateEmailDomain(req) {
     const email = req.data.Email;
 
@@ -9,6 +10,29 @@ async function validateEmailDomain(req) {
         req.error(400, `The mail is invalid`);
     }
 }
+
+
+//The trainer must be in between 18 and 110 years old
+//async it is not strictly neccesary like before because is a substract but is a good practice for the future
+async function validateAge(req){
+
+    //This lines extracts the raw input from the current user request
+    const birthDateRaw =req.data.Birthdate;
+    //And this converts the raw text into a js data object to use special methods
+    const birthDate = new Date(birthDateRaw);
+    const today = new Date();
+    let age= today.getFullYear() - birthDate.getFullYear();
+
+    if(age<18){
+        req.error(400, 'The trainer is young to register')
+    }
+    if (age>110){
+        req.error(400, 'The trainer is too old to register')
+    }
+
+}
+
 module.exports = {
-    validateEmailDomain
+    validateEmailDomain,
+    validateAge
 };

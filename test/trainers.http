@@ -1,14 +1,27 @@
+### Too young and invalid email
 POST http://localhost:4004/odata/v4/pokemon/Trainers
 Content-Type: application/json
 
 {
-    "FirstName": "Gary",
-    "LastName": "Oak",
-    "Email": "gary@gmail.com", 
-    "Birthdate": "1990-01-01"
+    "FirstName": "Baby",
+    "LastName": "Chiquito",
+    "Email": "baby@gmail.com", 
+    "Birthdate": "2015-01-01"
 }
 
-###
+### Too old
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+
+{
+    "FirstName": "Ancient",
+    "LastName": "Man",
+    "Email": "ancient@nubexx.com",
+    "Birthdate": "1900-01-01"
+}
+
+
+###Correct one
 POST http://localhost:4004/odata/v4/pokemon/Trainers
 Content-Type: application/json
 
