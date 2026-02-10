@@ -1,0 +1,9 @@
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Meowth",
+    "Weight": 40,
+    "Height": 4,
+    "team_ID": "43a82562-5137-4483-a066-49712e9a1599"
+}

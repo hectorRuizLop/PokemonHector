@@ -1,0 +1,22 @@
+###
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+
+{
+    "Name": "Example Team",
+    "Description": "This is the example team 1",
+    "Active": true
+}
+
+//The team is fc4f6e1a-1395-4072-a734-517cf2ca3737
+###
+GET http://localhost:4004/odata/v4/pokemon/Teams(fc4f6e1a-1395-4072-a734-517cf2ca3737)
+
+
+//Set to inactive a team
+###
+DELETE http://localhost:4004/odata/v4/pokemon/Teams(fc4f6e1a-1395-4072-a734-517cf2ca3737)
+
+//Check the inactive team 
+###
+GET http://localhost:4004/odata/v4/pokemon/Teams(fc4f6e1a-1395-4072-a734-517cf2ca3737)
