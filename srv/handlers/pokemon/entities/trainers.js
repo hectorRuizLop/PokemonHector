@@ -2,7 +2,7 @@
 async function validateEmailDomain(req) {
     const { Email: email } = req.data;
 
-    if (!email) return;
+    if (!email) return req.error(400, 'You need a mail'); 
     //The $ indicates that the string must finish there
     const emailRegex = /@(nubexx\.com|nubexx\.es)$/;
 
