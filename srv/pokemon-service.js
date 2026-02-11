@@ -4,9 +4,8 @@ const handlers = require('./handlers');
 //You need one listener each time in sap cap 
 module.exports = cds.service.impl(async function() {
     //Check if the email format is correct
-    this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateEmailDomain);
     //Check if the Trainer is in the age addecuate
-    this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateAge);
+    this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateTrainerCreation);
     //Check if already exists a pokemon in the team
     this.before('CREATE', 'Captures', handlers.pokemon.entities.captures.uniquePokemons);
     //Set teams to inactive

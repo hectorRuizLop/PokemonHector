@@ -1,6 +1,6 @@
 //The email must end with @nubexx.com or @nubexx.es
 async function validateEmailDomain(req) {
-    const email = req.data.Email;
+    const { Email: email } = req.data;
 
     if (!email) return;
     //The $ indicates that the string must finish there
@@ -17,7 +17,7 @@ async function validateEmailDomain(req) {
 async function validateAge(req){
 
     //This lines extracts the raw input from the current user request
-    const birthDateRaw =req.data.Birthdate;
+    const { Birthdate: birthDateRaw } = req.data;
     //And this converts the raw text into a js data object to use special methods
     const birthDate = new Date(birthDateRaw);
     const today = new Date();
@@ -45,8 +45,12 @@ function nameToUppercase(dataOfDDBB){
 
 }
 
+async function validateTrainerCreation(req) {
+    await validateEmailDomain(req);
+    await validateAge(req);
+}
+
 module.exports = {
-    validateEmailDomain,
-    validateAge,
+    validateTrainerCreation,
     nameToUppercase
 };
