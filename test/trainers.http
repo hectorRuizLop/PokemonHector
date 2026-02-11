@@ -31,3 +31,14 @@ Content-Type: application/json
     "Email": "ash@nubexx.com",
     "Birthdate": "1995-05-05"
 }
+
+###Lower case
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+
+{
+    "FirstName": "ashinlowercase",
+    "LastName": "Nubexx",
+    "Email": "ash@nubexx.com",
+    "Birthdate": "1995-05-05"
+}

@@ -3,7 +3,7 @@ const handlers = require('./handlers');
 const { trainers, captures } = require('./handlers/pokemon/entities');
 
 //You need one listener each time in sap cap 
-module.exports = async function (srv) {
+module.exports = cds.service.impl(async function() {
     //Check if the email format is correct
     this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateEmailDomain);
     //Check if the Trainer is in the age addecuate
@@ -14,5 +14,6 @@ module.exports = async function (srv) {
     this.on('DELETE', 'Teams', handlers.pokemon.entities.teams.setTeamInactive)
     //Set a restriction that the team cannot be created without pokemons
     this.before('CREATE', 'Teams', handlers.pokemon.entities.teams.validateActiveTeamNotEmpty);
-
-    };
+    //Put the first name of the trainer into upper case
+    this.after('READ', 'Trainers', handlers.pokemon.entities.trainers.nameToUppercase)
+    });

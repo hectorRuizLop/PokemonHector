@@ -32,7 +32,21 @@ async function validateAge(req){
 
 }
 
+//In this case we don't use req as a parametes
+//Because we are using after so the ddbb has finished his job
+//So we pick the output
+function nameToUppercase(dataOfDDBB){
+    //The => is the new way in js of function(trainer)
+    //Pick the temporal variable trainer that represents the individual trainer
+    //and put the parameter firstname in uppercase 
+    dataOfDDBB.forEach(trainer => {
+        trainer.FirstName = trainer.FirstName.toUpperCase();
+    });
+
+}
+
 module.exports = {
     validateEmailDomain,
-    validateAge
+    validateAge,
+    nameToUppercase
 };
