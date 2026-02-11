@@ -20,3 +20,29 @@ DELETE http://localhost:4004/odata/v4/pokemon/Teams(fc4f6e1a-1395-4072-a734-517c
 //Check the inactive team 
 ###
 GET http://localhost:4004/odata/v4/pokemon/Teams(fc4f6e1a-1395-4072-a734-517cf2ca3737)
+
+### Make an empty team
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+
+{
+    "Name": "Empty Test Team",
+    "Active": true
+}
+
+### Active the team and should fail 
+PATCH http://localhost:4004/odata/v4/pokemon/Teams(5840fe03-0f1e-405c-9e60-a0e277e1b0e5)
+Content-Type: application/json
+
+{
+    "Active": true
+}
+
+###
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+
+{
+    "Name": "Fail",
+    "Active": true
+}

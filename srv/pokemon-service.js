@@ -12,5 +12,7 @@ module.exports = async function (srv) {
     this.before('CREATE', 'Captures', handlers.pokemon.entities.captures.uniquePokemons)
     //Set teams to inactive
     this.on('DELETE', 'Teams', handlers.pokemon.entities.teams.setTeamInactive)
+    //Set a restriction that the team cannot be created without pokemons
+    this.before('CREATE', 'Teams', handlers.pokemon.entities.teams.validateActiveTeamNotEmpty);
 
     };
