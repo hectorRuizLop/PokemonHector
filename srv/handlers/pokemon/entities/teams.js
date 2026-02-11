@@ -16,8 +16,11 @@ async function validateActiveTeamNotEmpty(req){
         const pokemonCount= await SELECT.from(Captures).where({team_ID: ID});
         
         //In js !pokemons doesn't work because [] is true
-        if(pokemonCount.length==0){
-            req.error(400, ' The team cannot be created without pokemons')
+        if(pokemonCount.length>0){
+            //If it has pokemos we active it
+            req.data.Active=true;
+        }else{
+            req.data.Active=false;
         }
     }
 }
