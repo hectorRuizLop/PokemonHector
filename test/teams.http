@@ -26,17 +26,27 @@ POST http://localhost:4004/odata/v4/pokemon/Teams
 Content-Type: application/json
 
 {
-    "Name": "Empty Test Team",
-    "Active": true
+    "Name": "Empty Test Team"
 }
 
-### Active the team and should fail 
-PATCH http://localhost:4004/odata/v4/pokemon/Teams(5840fe03-0f1e-405c-9e60-a0e277e1b0e5)
+### Active the team and should fail 54-7f6c024ec8
+POST http://localhost:4004/odata/v4/pokemon/Teams(8c600f34-6b7a-4ee1-96dc)/setTeamStatus
 Content-Type: application/json
 
 {
-    "Active": true
+    "Active": false
 }
+### 
+POST http://localhost:4004/odata/v4/pokemon/Teams(124e12d4-d04b-4f19-a26d-ae7c3ec96b16)/setTeamStatus
+Content-Type: application/json
+
+{
+    "Active": false
+}
+
+###
+GET http://localhost:4004/odata/v4/pokemon/Teams(124e12d4-d04b-4f19-a26d-ae7c3ec96b16)
+
 
 ###
 POST http://localhost:4004/odata/v4/pokemon/Teams

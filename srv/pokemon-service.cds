@@ -7,8 +7,9 @@ service PokemonService {
         //Because it is on this service and not in the schema.cds it doesn't stores in the bbdd
         FirstName || ' ' || LastName as Name : String(121)
     }
-    entity Teams as projection on my.Teams;
-
+    entity Teams as projection on my.Teams actions {
+        action setTeamStatus(Active: Boolean) returns Teams;
+    };
     //This tag is for the new entity PokemonSizes no tell cap what is the official
     @cds.redirection.target : true
     entity Captures as projection on my.Captures;
