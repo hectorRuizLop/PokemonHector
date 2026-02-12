@@ -50,6 +50,20 @@ async function validateTrainerCreation(req) {
     await validateAge(req);
 }
 
+async function setTeamStatus(req) {
+    const id = req.params[0].ID || req.params[0];
+    const {Active } =req.data;
+
+    if (Active === undefined) {
+        return req.error(400, "You have to specify if the team is active or not");
+    }
+    await UPDATE(this.entities.Teams, id).with({ Active: Active });
+    return await SELECT.one.from(this.entities.Teams).where({ ID: id });
+   
+    
+}
+
+
 module.exports = {
     validateTrainerCreation,
     nameToUppercase

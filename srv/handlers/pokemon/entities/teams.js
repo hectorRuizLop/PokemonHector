@@ -9,9 +9,8 @@ async function setTeamInactive(req){
 }
 
 async function validateActiveTeamNotEmpty(req){
-    const{Active}=req.data;
-    const ID =req.data.ID;
-    if(Active==true){
+    const{Active, ID}=req.data;
+    if(Active===true){
         const{Captures}=cds.entities;
         const pokemonCount= await SELECT.from(Captures).where({team_ID: ID});
         
