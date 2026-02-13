@@ -45,8 +45,24 @@ async function setTeamStatus(req) {
     
 }
 
+async function getRandomPokemon(req) {
+    const { Captures }= cds.entities;
+    const teamID =req.params[0].ID ||req.params[0];
+    const pokemons= await SELECT.from(Captures).where({ team_ID: teamID});
+
+    if (!pokemons|| pokemons.length === 0) {
+        return req.error(404, "Este equipo no tiene Pokémons para elegir.");
+    }
+
+    const randomIndex= Math.floor(Math.random()*pokemons.length);
+    const selectedPokemon =pokemons[randomIndex];
+
+    return selectedPokemon;
+}
+
 module.exports={
     setTeamInactive,
     validateActiveTeamNotEmpty,
-    setTeamStatus
+    setTeamStatus,
+    getRandomPokemon
 };

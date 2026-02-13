@@ -1,0 +1,61 @@
+###
+# @name createLotteryTeam
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+
+{
+    "Name": "Random Team",
+    "Description": "Team for random",
+    "Active": true
+}
+
+###
+@teamID = {{createLotteryTeam.response.body.ID}}
+
+###
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Member1",
+    "Weight": 6,
+    "Height": 4,
+    "team_ID": "{{teamID}}"
+}
+
+###
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Member2",
+    "Weight": 6,
+    "Height": 4,
+    "team_ID": "{{teamID}}"
+}
+###
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Member3",
+    "Weight": 6,
+    "Height": 4,
+    "team_ID": "{{teamID}}"
+}
+
+###
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Member4",
+    "Weight": 6,
+    "Height": 4,
+    "team_ID": "{{teamID}}"
+}
+
+
+###
+GET http://localhost:4004/odata/v4/pokemon/Teams({{teamID}})/getRandomPokemon()
+Content-Type: application/json

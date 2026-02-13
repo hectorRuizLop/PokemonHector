@@ -11,6 +11,7 @@ service PokemonService {
     @Capabilities : { DeleteRestrictions : { Deletable : false } }
     entity Teams as projection on my.Teams actions {
         action setTeamStatus(Active: Boolean) returns Teams;
+        function getRandomPokemon() returns Captures;
     };
     //This tag is for the new entity PokemonSizes no tell cap what is the official
     @cds.redirection.target : true

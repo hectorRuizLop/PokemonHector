@@ -27,8 +27,10 @@ module.exports = cds.service.impl(async function() {
     this.before('CREATE', 'Teams', handlers.pokemon.entities.teams.validateActiveTeamNotEmpty);
     
     // Action to change status (Soft Delete / Reactivation)
-    this.on('setTeamStatus', 'Teams', handlers.pokemon.entities.teams.setTeamStatus); });
-
+    this.on('setTeamStatus', 'Teams', handlers.pokemon.entities.teams.setTeamStatus); 
+    this.on('getRandomPokemon', 'Teams', handlers.pokemon.entities.teams.getRandomPokemon);});
+    
+    
 
 
     
