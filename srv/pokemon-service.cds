@@ -7,6 +7,8 @@ service PokemonService {
         //Because it is on this service and not in the schema.cds it doesn't stores in the bbdd
         FirstName || ' ' || LastName as Name : String(121)
     }
+    //Delete the fisical deletion of the team
+    @Capabilities : { DeleteRestrictions : { Deletable : false } }
     entity Teams as projection on my.Teams actions {
         action setTeamStatus(Active: Boolean) returns Teams;
     };

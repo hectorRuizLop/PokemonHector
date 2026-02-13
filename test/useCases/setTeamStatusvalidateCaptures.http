@@ -1,0 +1,68 @@
+
+###
+### USE CASE SET TEAM STATUS 
+###
+
+### Create the team empty 0f06e6c3-8b82-479d-b743-2127ee44cb66
+# @name createTeam
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+
+{
+    "Name": "TestTeam1",
+    "Description": "Team to test validations"
+}
+
+### 
+@teamID = {{createTeam.response.body.ID}}
+
+###Try to active the team empty, it should fail
+POST http://localhost:4004/odata/v4/pokemon/Teams({{teamID}})/setTeamStatus
+Content-Type: application/json
+
+{
+    "Active": true
+}
+
+### Add ap pokemon to the team
+# @name createCapture
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Pikachu",
+    "Weight": 6,
+    "Height": 4,
+    "team_ID": "{{teamID}}"
+}
+
+### Try to active it now, it should work
+POST http://localhost:4004/odata/v4/pokemon/Teams({{teamID}})/setTeamStatus
+Content-Type: application/json
+
+{
+    "Active": true
+}
+
+
+###
+### USE CASE VALIDATE CAPTURES
+###
+
+
+### Save the ID of the capture
+@captureID = {{createCapture.response.body.ID}}
+
+### Try to delete the capture it should fail
+DELETE http://localhost:4004/odata/v4/pokemon/Captures({{captureID}})
+
+### Deactive the team firt
+POST http://localhost:4004/odata/v4/pokemon/Teams({{teamID}})/setTeamStatus
+Content-Type: application/json
+
+{
+    "Active": false
+}
+
+### Try to delete the pokemon, it should work 
+DELETE http://localhost:4004/odata/v4/pokemon/Captures({{captureID}})

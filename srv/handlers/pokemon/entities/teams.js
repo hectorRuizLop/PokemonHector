@@ -24,7 +24,29 @@ async function validateActiveTeamNotEmpty(req){
     }
 }
 
+async function setTeamStatus(req) {
+    const id = req.params[0].ID || req.params[0];
+    const {Active } =req.data;
+
+    if (Active === true) {
+        const { Captures } = cds.entities;
+        
+        const id = req.params[0].ID || req.params[0];
+
+        const pokemonCount = await SELECT.from(Captures).where({ team_ID: id });
+        
+        if (pokemonCount.length === 0) {
+            return req.error(400, "You cannot activate a team without pokemons");
+        }
+    }
+
+    await UPDATE(req.subject).with({ Active: Active });
+    return await SELECT.one.from(req.subject);
+    
+}
+
 module.exports={
     setTeamInactive,
-    validateActiveTeamNotEmpty
+    validateActiveTeamNotEmpty,
+    setTeamStatus
 };

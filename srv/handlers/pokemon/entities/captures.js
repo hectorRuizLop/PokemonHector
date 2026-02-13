@@ -15,6 +15,24 @@ async function uniquePokemons(req){
     }
 }
 
+async function validateCaptureDeletion(req){
+    const { Captures, Teams } = cds.entities;
+    const captureID = req.data.ID;
+    const capture = await SELECT.one.from(Captures).where({ID:captureID});
+    if(!capture) return; //If not exists the delte will fail on its own
+    //Know the state of the team
+    const team = await SELECT.one.from(Teams).where({ID:capture.team_ID})
+
+    if (team && team.Active === true) {
+        const pokemonCount = await SELECT.from(Captures).where({ team_ID: team.ID });
+        if (pokemonCount.length <= 1) {
+            return req.error(400, `.You cannot delete the last pokemon in the team because it is active`);
+        }
+    }
+    
+}
+
 module.exports={
-    uniquePokemons
+    uniquePokemons,
+    validateCaptureDeletion
 };
