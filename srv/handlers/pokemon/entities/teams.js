@@ -51,7 +51,7 @@ async function getRandomPokemon(req) {
     const pokemons= await SELECT.from(Captures).where({ team_ID: teamID});
 
     if (!pokemons|| pokemons.length === 0) {
-        return req.error(404, "Este equipo no tiene Pokémons para elegir.");
+        return req.error(404, "This team has not pokemon to pick");
     }
 
     const randomIndex= Math.floor(Math.random()*pokemons.length);

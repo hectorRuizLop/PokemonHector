@@ -4,8 +4,8 @@ POST http://localhost:4004/odata/v4/pokemon/Teams
 Content-Type: application/json
 
 {
-    "Name": "Equipo Validación",
-    "Description": "Test de borrado",
+    "Name": "Validation team",
+    "Description": "Deletion test",
     "Active": true
 }
 
