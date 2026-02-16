@@ -15,6 +15,7 @@ async function uniquePokemons(req){
     }
 }
 
+/*
 async function validateCaptureDeletion(req){
     const { Captures, Teams } = cds.entities;
     const captureID = req.data.ID;
@@ -30,6 +31,23 @@ async function validateCaptureDeletion(req){
         }
     }
     
+}
+*/
+async function validateCaptureDeletion(req) {
+    const { Captures } = cds.entities;
+
+    const captureData = await SELECT.one.from(Captures).columns(c => {
+        c.ID,                  
+        c.team(t => {          
+            t.Active,          
+            t.captures(k => {  
+                k.ID           
+            })
+        })
+    }).where({ ID: req.data.ID }); 
+    if (captureData && captureData.Team?.Active && captureData.Team.Captures.length < 2) {
+        return req.error(400, 'You cannot delete the last pokemon in the team because it is active');
+    }
 }
 
 module.exports={

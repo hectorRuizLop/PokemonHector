@@ -1,0 +1,42 @@
+### It will be inactive by default
+# @name createTeam
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+
+{
+    "Name": "Equipo Validación",
+    "Description": "Test de borrado",
+    "Active": true
+}
+
+### 
+@teamID = {{createTeam.response.body.ID}}
+
+
+### 
+# @name createCapture
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+
+{
+    "PokemonName": "Pikachu",
+    "Weight": 10,
+    "Height": 10,
+    "team_ID": "{{teamID}}"
+}
+
+###
+@captureID = {{createCapture.response.body.ID}}
+
+
+### Now that the team has a pokemon it can be delted
+POST http://localhost:4004/odata/v4/pokemon/Teams({{teamID}})/setTeamStatus
+Content-Type: application/json
+
+{
+    "Active": true
+}
+
+
+### Try to delete a pokemon that should fail
+DELETE http://localhost:4004/odata/v4/pokemon/Captures({{captureID}})
