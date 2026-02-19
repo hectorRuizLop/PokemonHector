@@ -1,0 +1,36 @@
+{
+  "xsappname": "PokemonHectorRuiz-app",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    { "name": "$XSAPPNAME.Admin", "description": "Administrator access" },
+    { "name": "$XSAPPNAME.Trainer", "description": "Trainer access" },
+    { "name": "$XSAPPNAME.Viewer", "description": "Read access" }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "AdminRole",
+      "description": "Administrator role",
+      "scope-references": ["$XSAPPNAME.Admin"]
+    },
+    {
+      "name": "TrainerRole",
+      "description": "Trainer role",
+      "scope-references": ["$XSAPPNAME.Trainer"]
+    },
+    {
+      "name": "ViewerRole",
+      "description": "View role",
+      "scope-references": ["$XSAPPNAME.Viewer"]
+    }
+  ],
+  "oauth2-configuration": {
+    "credential-types": [
+      "binding-secret",
+      "x509"
+    ],
+    "redirect-uris": [
+      "https://*.applicationstudio.cloud.sap/**"
+    ]
+  }
+}

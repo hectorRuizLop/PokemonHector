@@ -5,7 +5,7 @@
   "dependencies": {
     "@cap-js/hana": "^2",
     "@sap/cds": "^9",
-    "@sap/xssec": "^4.12.2",
+    "@sap/xssec": "^4",
     "express": "^4"
   },
   "devDependencies": {
@@ -19,7 +19,31 @@
   "cds": {
     "requires": {
       "auth": {
-        "kind": "dummy"
+        "kind": "mocked",
+        "users": {
+          "theadmin": {
+            "password": "123",
+            "roles": ["Admin"]
+          },
+          "thetrainer": {
+            "password": "123",
+            "roles": ["Trainer"]
+          },
+          "theviewer": {
+            "password": "123",
+            "roles": ["Viewer"]
+          },
+          "hector": {
+            "password": "123",
+            "roles": ["Admin"]
+          }
+        }
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        },
+        "destinations": true
       }
     }
   }

@@ -25,6 +25,8 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: PokemonHectorRuiz-db
+      - name: PokemonHectorRuiz-auth
+      - name: PokemonHectorRuiz-destination
 
   - name: PokemonHectorRuiz-db-deployer
     type: hdb
@@ -33,6 +35,27 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: PokemonHectorRuiz-db
+  - name: PokemonHectorRuiz
+    type: approuter.nodejs
+    path: app/router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: PokemonHectorRuiz-auth
+      - name: PokemonHectorRuiz-destination
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
 
 resources:
   - name: PokemonHectorRuiz-db
@@ -40,3 +63,25 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: PokemonHectorRuiz-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: PokemonHectorRuiz-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+          redirect-uris:
+            - https://*~{app-api/app-uri}/**
+    requires:
+      - name: app-api
+  - name: PokemonHectorRuiz-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite

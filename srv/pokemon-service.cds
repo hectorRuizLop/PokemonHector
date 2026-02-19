@@ -1,27 +1,55 @@
 using { com.pokemon as my } from '../db/schema';
 
-
+//Everyone has to be logued
+@requires: 'authenticated-user'
 service PokemonService {
+    //Admin can do anything and viewer trainer can only read
+    @restrict: [
+        { grant: '*', to: 'Admin' },
+        { grant: 'READ', to: ['Viewer', 'Trainer'] }
+    ]
     entity Trainers as projection on my.Trainers{
         *,
         //Because it is on this service and not in the schema.cds it doesn't stores in the bbdd
         FirstName || ' ' || LastName as Name : String(121)
     }
+
+
+    //In the table teams the same
+    @restrict: [
+        { grant: '*', to: 'Admin' },
+        { grant: 'READ', to: ['Viewer', 'Trainer'] }
+    ]
     //Delete the fisical deletion of the team
     @Capabilities : { DeleteRestrictions : { Deletable : false } }
     entity Teams as projection on my.Teams actions {
         action setTeamStatus(Active: Boolean) returns Teams;
         function getRandomPokemon() returns Captures;
     };
+    @restrict: [
+        { grant: '*', to: 'Admin' },
+        { grant: 'READ', to: ['Viewer', 'Trainer'] }
+    ]
     //This tag is for the new entity PokemonSizes no tell cap what is the official
     @cds.redirection.target : true
     entity Captures as projection on my.Captures;
+    @restrict: [
+        { grant: '*', to: 'Admin' },
+        { grant: 'READ', to: ['Viewer', 'Trainer'] }
+    ]
     entity Medals as projection on my.Medals;
+    @restrict: [
+        { grant: '*', to: 'Admin' },
+        { grant: 'READ', to: ['Viewer', 'Trainer'] }
+    ]
     @cds.redirection.target :true
     entity TrainerMedals as projection on my.TrainerMedals;
- 
+    @restrict: [
+        { grant: '*', to: 'Admin' },
+        { grant: 'READ', to: ['Viewer', 'Trainer'] }
+    ]
     entity Gyms as projection on my.Gyms;
-
+    //Because this entities are read only no one can write
     @readonly
     entity PokemonSizes as select from my.Captures {
         key ID,
