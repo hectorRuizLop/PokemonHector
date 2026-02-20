@@ -3,6 +3,7 @@ const handlers = require('./handlers');
 
 //You need one listener each time in sap cap 
 module.exports = cds.service.impl(async function() {
+
     // TRAINERS 
     // Check if the email format is correct and check age
     this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateTrainerCreation);
@@ -13,6 +14,14 @@ module.exports = cds.service.impl(async function() {
     // CAPTURES 
     // Check if already exists a pokemon in the team
     this.before('CREATE', 'Captures', handlers.pokemon.entities.captures.uniquePokemons);
+    this.on('getPokemonInformation', async(req)=>{
+        const pokemonName=req.data.pokemonName;
+        const pokeApi= await cds.connect.to('PokeAPI');
+        const response = await pokeApi.send('GET', `/pokemon/${pokemonName.toLowerCase()}`);
+        const result = {id: response.id, name: response.name};
+        return result;
+    })
+
 
     // Check if we are deleting the last pokemon of an active team
     this.before('DELETE', 'Captures', handlers.pokemon.entities.captures.validateCaptureDeletion);

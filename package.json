@@ -4,6 +4,8 @@
   "description": "A simple CAP project.",
   "dependencies": {
     "@cap-js/hana": "^2",
+    "@sap-cloud-sdk/http-client": "^4.4.0",
+    "@sap-cloud-sdk/resilience": "^4.4.0",
     "@sap/cds": "^9",
     "@sap/xssec": "^4",
     "express": "^4"
@@ -23,27 +25,46 @@
         "users": {
           "theadmin": {
             "password": "123",
-            "roles": ["Admin"]
+            "roles": [
+              "Admin"
+            ]
           },
           "thetrainer": {
             "password": "123",
-            "roles": ["Trainer"]
+            "roles": [
+              "Trainer"
+            ]
           },
           "theviewer": {
             "password": "123",
-            "roles": ["Viewer"]
+            "roles": [
+              "Viewer"
+            ]
           },
           "hector": {
             "password": "123",
-            "roles": ["Admin"]
+            "roles": [
+              "Admin"
+            ]
           }
+        }
+      },
+      "PokeAPI": {
+        "kind": "rest",
+        "credentials": {
+          "url": "https://pokeapi.co/api/v2"
+        },
+        "[production]": {
+          "destinations": true
+        },
+        "[hybrid]": {
+          "destinations": true
         }
       },
       "[production]": {
         "auth": {
           "kind": "xsuaa"
-        },
-        "destinations": true
+        }
       }
     }
   }

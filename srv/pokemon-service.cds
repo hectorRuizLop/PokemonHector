@@ -87,4 +87,13 @@ service PokemonService {
         medal.gym.Type as GymType,
         medal.gym.location.City as GymCity
     }
+
+    type PokemonData {
+        id     : Integer;
+        name   : String;
+        height : Integer;
+        weight : Integer;
+    }
+
+    function getPokemonInformation(pokemonName: String) returns PokemonData;
 }

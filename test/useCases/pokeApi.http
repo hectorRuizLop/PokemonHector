@@ -1,0 +1,3 @@
+###
+GET http://localhost:4004/odata/v4/pokemon/getPokemonInformation(pokemonName='pikachu')
+Authorization: Basic hector 123
