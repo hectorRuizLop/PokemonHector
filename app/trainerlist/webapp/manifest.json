@@ -1,0 +1,120 @@
+{
+  "_version": "1.82.0",
+  "sap.app": {
+    "id": "com.nbx.trainerlist",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/pokemon/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.145.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.nbx.trainerlist.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true
+        }
+      }  
+    },
+    "routing": {
+    "config": {
+        "routerClass": "sap.f.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.nbx.trainerlist.view",
+        "controlId": "layout",
+        "controlAggregation": "beginColumnPages",
+        "async": true
+    },
+    "routes": [
+        {
+            "name": "RouteTrainers",
+            "pattern": "",
+            "layout": "OneColumn",
+            "target": ["TargetTrainers"]
+        },
+        {
+            "name": "RouteTeams",
+            "pattern": "trainer/{trainerId}",
+            "layout": "TwoColumnsMidExpanded",
+            "target": ["TargetTrainers", "TargetTeams"]
+        },
+        {
+            "name": "RouteCaptures",
+            "pattern": "trainer/{trainerId}/team/{teamId}",
+            "layout": "ThreeColumnsMidExpanded",
+            "target": ["TargetTrainers", "TargetTeams", "TargetCaptures"]
+        }
+    ],
+    "targets": {
+        "TargetTrainers": {
+            "type": "View",
+            "name": "Main",
+            "id": "Main",
+            "level": 1,
+            "controlAggregation": "beginColumnPages"
+        },
+        "TargetTeams": {
+            "type": "View",
+            "name": "Teams",
+            "id": "Teams",
+            "level": 2,
+            "controlAggregation": "midColumnPages"
+        },
+        "TargetCaptures": {
+            "type": "View",
+            "name": "Captures",
+            "id": "Captures",
+            "level": 3,
+            "controlAggregation": "endColumnPages"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.nbx.trainerlist.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

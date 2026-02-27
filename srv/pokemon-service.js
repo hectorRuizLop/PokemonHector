@@ -16,7 +16,7 @@ module.exports = cds.service.impl(async function() {
     this.before('CREATE', 'Captures', handlers.pokemon.entities.captures.uniquePokemons);
     this.on('getPokemonInformation', async(req)=>{
         const pokemonName=req.data.pokemonName;
-        const pokeApi= await cds.connect.to('PokeAPI');
+        const pokeApi= await cds.connect.to('PokeAPIDestination');
         const response = await pokeApi.send('GET', `/pokemon/${pokemonName.toLowerCase()}`);
         const result = {id: response.id, name: response.name};
         return result;

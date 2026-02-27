@@ -12,10 +12,12 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
-    "@sap/cds-dk": "^9"
+    "@sap/cds-dk": "^9",
+    "cds-plugin-ui5": "^0.13.0"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "watch-trainerlist": "cds watch --open com.nbx.trainerlist/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "cds": {
@@ -49,13 +51,14 @@
           }
         }
       },
-      "PokeAPI": {
+      "PokeAPIDestination": {
         "kind": "rest",
         "credentials": {
-          "url": "https://pokeapi.co/api/v2"
+          "destination": "PokeAPI",
+          "selectionStrategy": "AlwaysProvider"
         },
         "[production]": {
-          "destinations": true
+          "destinations": "true"
         },
         "[hybrid]": {
           "destinations": true
@@ -67,5 +70,8 @@
         }
       }
     }
-  }
+  },
+  "workspaces": [
+    "app/*"
+  ]
 }

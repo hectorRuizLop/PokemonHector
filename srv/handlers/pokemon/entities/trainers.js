@@ -40,7 +40,7 @@ function nameToUppercase(dataOfDDBB){
     //Pick the temporal variable trainer that represents the individual trainer
     //and put the parameter firstname in uppercase 
     dataOfDDBB.forEach(trainer => {
-        trainer.FirstName = trainer.FirstName.toUpperCase();
+        trainer.FirstName = trainer.FirstName?.toUpperCase();
     });
 
 }

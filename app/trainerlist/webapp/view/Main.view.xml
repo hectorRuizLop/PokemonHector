@@ -1,0 +1,24 @@
+<mvc:View controllerName="com.nbx.trainerlist.controller.Main"
+    displayBlock="true"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="Trainers">
+        <content>
+            <Table id="trainersTable" items="{/Trainers}">
+                <columns>
+                    <Column><Text text="First Name" /></Column>
+                    <Column><Text text="Last Name" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press=".onPressTrainer">
+                        <cells>
+                            <Text text="{FirstName}" />
+                            <Text text="{LastName}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

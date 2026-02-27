@@ -1,0 +1,1 @@
+using PokemonService as service from '../../srv/pokemon-service';

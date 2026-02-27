@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Table id="teamsTable" items="{teams}">
+        <columns>
+            <Column><Text text="Name" /></Column>
+            <Column><Text text="Description" /></Column>
+            <Column><Text text="Active" /></Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Navigation" press=".onPressTeam">
+                <cells>
+                    <Text text="{Name}" />
+                    <Text text="{Description}" />
+                    <CheckBox selected="{Active}" editable="false" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+</core:FragmentDefinition>
