@@ -20,5 +20,13 @@
                 </items>
             </Table>
         </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button
+                    text="Add Trainer"
+                    press=".onAddTrainer"/>
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
