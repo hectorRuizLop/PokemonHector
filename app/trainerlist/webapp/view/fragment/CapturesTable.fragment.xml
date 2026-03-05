@@ -4,9 +4,9 @@
 
     <Table id="capturesTable" items="{captures}">
         <columns>
-            <Column><Text text="Pokémon" /></Column>
-            <Column><Text text="Weight (kg)" /></Column>
-            <Column><Text text="Height (cm)" /></Column>
+            <Column><Text text="{i18n>COLUMN_POKEMON}" /></Column>
+            <Column><Text text="{i18n>COLUMN_WEIGHT}" /></Column>
+            <Column><Text text="{i18n>COLUMN_HEIGHT}" /></Column>
         </columns>
         <items>
             <ColumnListItem type="Inactive">

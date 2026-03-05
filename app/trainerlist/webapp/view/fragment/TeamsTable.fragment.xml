@@ -4,9 +4,9 @@
 
     <Table id="teamsTable" items="{teams}">
         <columns>
-            <Column><Text text="Name" /></Column>
-            <Column><Text text="Description" /></Column>
-            <Column><Text text="Active" /></Column>
+            <Column><Text text="{i18n>COLUMN_NAME}" /></Column>
+            <Column><Text text="{i18n>COLUMN_DESCRIPTION}" /></Column>
+            <Column><Text text="{i18n>COLUMN_ACTIVE}" /></Column>
         </columns>
         <items>
             <ColumnListItem type="Navigation" press=".onPressTeam">

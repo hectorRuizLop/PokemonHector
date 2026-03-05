@@ -5,7 +5,7 @@
 
     <Dialog
         id="addTrainerDialog"
-        title="Add Trainer"
+        title="{util>TITLE_ADD_TRAINER}"
         contentWidth="400px">
 
         <content>
@@ -13,17 +13,17 @@
 
                 <Input
                     id="inputFirstName"
-                    placeholder="First Name"
+                    placeholder="{i18n>PLACEHOLDER_FIRST_NAME}"
                     width="90%"/>
 
                 <Input
                     id="inputLastName"
-                    placeholder="Last Name"
+                    placeholder="{i18n>PLACEHOLDER_LAST_NAME}"
                     width="90%"/>
 
                 <Input
                     id="inputEmail"
-                    placeholder="Email"
+                    placeholder="{i18n>PLACEHOLDER_EMAIL}"
                     width="90%"/>
 
             </l:VerticalLayout>
@@ -31,14 +31,14 @@
 
         <beginButton>
             <Button
-                text="Save"
+                text="{i18n>BUTTON_SAVE}"
                 type="Emphasized"
                 press=".onSaveTrainer"/>
         </beginButton>
 
         <endButton>
             <Button
-                text="Cancel"
+                text="{i18n>BUTTON_CANCEL}"
                 press=".onCancelTrainer"/>
         </endButton>
 

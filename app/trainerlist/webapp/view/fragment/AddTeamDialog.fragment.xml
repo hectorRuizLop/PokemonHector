@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <Dialog id="addTeamDialog"
+            title="{i18n>TITLE_ADD_TEAM}"
+            contentWidth="400px">
+
+        <content>
+            <l:VerticalLayout width="100%" class="sapUiSmallMargin">
+
+                <Input id="inputTeamName"
+                       placeholder="{i18n>PLACEHOLDER_TEAM_NAME}"
+                       width="90%"/>
+
+                <Input id="inputTeamDescription"
+                       placeholder="{i18n>PLACEHOLDER_TEAM_DESC}"
+                       width="90%"/>
+
+                <!-- Select para elegir el entrenador -->
+                <Select id="selectTrainer"
+                        width="90%"
+                        items="{/Trainers}">
+                    <core:Item key="{ID}" text="{FirstName} {LastName}"/>
+                </Select>
+
+            </l:VerticalLayout>
+        </content>
+
+        <beginButton>
+            <Button text="{i18n>BUTTON_SAVE}"
+                    type="Emphasized"
+                    press=".onSaveTeam"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>BUTTON_CANCEL}"
+                    press=".onCancelTeam"/>
+        </endButton>
+    </Dialog>
+
+</core:FragmentDefinition>

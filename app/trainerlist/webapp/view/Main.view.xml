@@ -3,12 +3,12 @@
     height="100%"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="Trainers">
+    <Page id="page" title="{i18n>TITLE_TRAINERS}">
         <content>
             <Table id="trainersTable" items="{/Trainers}">
                 <columns>
-                    <Column><Text text="First Name" /></Column>
-                    <Column><Text text="Last Name" /></Column>
+                    <Column><Text text="{i18n>COLUMN_FIRST_NAME}" /></Column>
+                    <Column><Text text="{i18n>COLUMN_LAST_NAME}" /></Column>
                 </columns>
                 <items>
                     <ColumnListItem type="Navigation" press=".onPressTrainer">
@@ -23,11 +23,13 @@
         <footer>
             <OverflowToolbar>
                 <ToolbarSpacer/>
+                <Button text="{i18n>BUTTON_ADD_TEAM}"
+                press=".onAddTeam"/>
                 <Button
-                    text="Add Trainer"
+                    text="{i18n>BUTTON_ADD_TRAINER}"
                     press=".onAddTrainer"/>
                     <Button
-                    text="Pokemons"
+                    text="{i18n>BUTTON_POKEMONS}"
                     press=".onImportPokemon"/>
             </OverflowToolbar>
         </footer>

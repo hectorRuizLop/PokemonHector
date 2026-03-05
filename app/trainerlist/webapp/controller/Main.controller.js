@@ -1,6 +1,7 @@
 sap.ui.define([
-    "./BaseController"
-], function (BaseController) {
+    "./BaseController",
+    "com/nbx/trainerlist/util/constants" 
+], function (BaseController, oConstants) {
     "use strict";
     
 
@@ -8,6 +9,7 @@ sap.ui.define([
         _oAddTrainerDialog: null,
         _oCurrentPokemon: null,
         _oImportDialog: null,
+        _oAddTeamDialog: null,
 
         onInit: function () {},
 
@@ -53,7 +55,7 @@ sap.ui.define([
                 LastName:  sLastName,
                 Email:     sEmail
             });
-            sap.m.MessageToast.show("Trainer added successfully!");
+            sap.m.MessageToast.show(this.getResourceBundle().getText("TOAST_TRAINER_ADDED"));
             this._oAddTrainerDialog.close();
 
         },
@@ -112,8 +114,8 @@ sap.ui.define([
             const sViewId = this.getView().getId();
             const p = this._oCurrentPokemon;
             sap.ui.core.Fragment.byId(sViewId, "txtPokemonName").setText(p.name);
-            sap.ui.core.Fragment.byId(sViewId, "txtPokemonHeight").setText(`${p.height} dm`);
-            sap.ui.core.Fragment.byId(sViewId, "txtPokemonWeight").setText(`${p.weight} hg`);
+            sap.ui.core.Fragment.byId(sViewId, "txtPokemonHeight").setText(`${p.height} ${oConstants.UNIT_HEIGHT_DM}`);
+            sap.ui.core.Fragment.byId(sViewId, "txtPokemonWeight").setText(`${p.weight} ${oConstants.UNIT_WEIGHT_HG}`);
         },
         onConfirmCapture: function () {
             const oModel = this.getView().getModel();
@@ -136,6 +138,55 @@ sap.ui.define([
                 this._oImportDialog.close();
                 oModel.refresh();
             }.bind(this));
+        },
+        //Open dialog
+        onAddTeam: function () {
+            if (this._oAddTeamDialog) {
+                this._oAddTeamDialog.open();
+                return;
+            }
+            sap.ui.core.Fragment.load({
+                id: this.getView().getId(),
+                name: "com.nbx.trainerlist.view.fragment.AddTeamDialog",
+                controller: this
+            }).then(function (oDialog) {
+                this._oAddTeamDialog = oDialog;
+                this.getView().addDependent(this._oAddTeamDialog);
+                this._oAddTeamDialog.open();
+            }.bind(this));
+        },
+        onSaveTeam: function () {
+            const sViewId = this.getView().getId();
+            const sName = sap.ui.core.Fragment.byId(sViewId, "inputTeamName").getValue();
+            const sDesc = sap.ui.core.Fragment.byId(sViewId, "inputTeamDescription").getValue();
+
+            const oSelect = sap.ui.core.Fragment.byId(sViewId, "selectTrainer");
+            const sTrainerId = oSelect.getSelectedKey();
+
+            if (!sName || !sTrainerId) {
+                sap.m.MessageToast.show(this.getResourceBundle().getText("MSG_FILL_REQUIRED"));
+                return;
+            }
+
+            const oModel = this.getView().getModel();
+            const oTeamsBinding = oModel.bindList("/Teams");
+
+            const oCreated = oTeamsBinding.create({
+                Name:        sName,
+                Description: sDesc,
+                Active:      true,
+                trainer_ID:  sTrainerId  
+            });
+
+            //Wait for the confirmation
+            oCreated.created().then(function () {
+                sap.m.MessageToast.show(this.getResourceBundle().getText("TOAST_TEAM_ADDED"));
+                this._oAddTeamDialog.close();
+                oModel.refresh();
+            }.bind(this));
+        },
+        onCancelTeam: function () {
+            this._oAddTeamDialog.close();
         }
     });   
 });

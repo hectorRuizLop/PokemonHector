@@ -4,24 +4,24 @@
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form">
     
-    <Dialog id="importPokemonDialog" title="Pokemon">
+    <Dialog id="importPokemonDialog" title="{i18n>TITLE_POKEMON_DIALOG}">
         <content>
             <VBox class="sapUiSmallMargin">
 
                 <form:SimpleForm>
                     <form:content>
-                        <Label text="Name"/>
+                        <Label text="{i18n>LABEL_POKEMON_NAME}"/>
                         <Text id="txtPokemonName" text=""/>
                         
-                        <Label text="Heihgt"/>
+                        <Label text="{i18n>LABEL_HEIGHT}"/>
                         <Text id="txtPokemonHeight" text=""/>
                         
-                        <Label text="Weight"/>
+                        <Label text="{i18n>LABEL_WEIGHT}"/>
                         <Text id="txtPokemonWeight" text=""/>
                     </form:content>
                 </form:SimpleForm>
 
-                <Label text="Which team do you want to add it??" class="sapUiSmallMarginTop"/>
+                <Label text="{i18n>LABEL_SELECT_TEAM}" class="sapUiSmallMarginTop"/>
                 <Select id="selectTeam" items="{/Teams}">
                     <core:Item key="{ID}" text="{Name}"/>
                 </Select>
@@ -30,10 +30,10 @@
         </content>
         
         <beginButton>
-            <Button text="Capture" press=".onConfirmCapture" type="Accept"/>
+            <Button text="{i18n>BUTTON_CAPTURE}" press=".onConfirmCapture" type="Accept"/>
         </beginButton>
         <endButton>
-            <Button text="Not capture" press=".onCancelCapture" type="Reject"/>
+            <Button text="{i18n>BUTTON_NOT_CAPTURE}" press=".onCancelCapture" type="Reject"/>
         </endButton>
     </Dialog>
     

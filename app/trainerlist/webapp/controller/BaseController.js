@@ -12,6 +12,9 @@ sap.ui.define([
         },
         getAppViewModel: function () {
             return this.getOwnerComponent().getRootControl().getModel("appView");
+        },
+        getResourceBundle: function () {
+            return this.getOwnerComponent().getModel("i18n").getResourceBundle();
         }
     });
 });
