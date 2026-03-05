@@ -60,3 +60,4 @@ entity Gyms : primary {
     medal : Association to Medals; 
     location : Location;
 }
+

@@ -26,6 +26,9 @@
                 <Button
                     text="Add Trainer"
                     press=".onAddTrainer"/>
+                    <Button
+                    text="Pokemons"
+                    press=".onImportPokemon"/>
             </OverflowToolbar>
         </footer>
     </Page>

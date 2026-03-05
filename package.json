@@ -54,8 +54,7 @@
       "PokeAPIDestination": {
         "kind": "rest",
         "credentials": {
-          "destination": "PokeAPI",
-          "selectionStrategy": "AlwaysProvider"
+          "url":"https://pokeapi.co/api/v2"
         },
         "[production]": {
           "destinations": "true"

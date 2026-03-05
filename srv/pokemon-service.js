@@ -37,9 +37,40 @@ module.exports = cds.service.impl(async function() {
     
     // Action to change status (Soft Delete / Reactivation)
     this.on('setTeamStatus', 'Teams', handlers.pokemon.entities.teams.setTeamStatus); 
-    this.on('getRandomPokemon', 'Teams', handlers.pokemon.entities.teams.getRandomPokemon);});
     
+    this.on('importPokemon', async (req) => {
+        
+        const randomId = Math.floor(Math.random() * 151) + 1;
+        
+        
+        const pokeApi = await cds.connect.to('PokeAPIDestination');
+        const response = await pokeApi.send('GET', `/pokemon/${randomId}`);
+        
+       
+        return {
+            id:     response.id,
+            name:   response.name,
+            height: response.height,
+            weight: response.weight
+        };
+    });
+
+    //Capture a pokemon to a team
+    this.on('capturePokemon', async (req) => {
+        const { teamId } = req.data;
+        const { PokemonName, Weight, Height } = req.data;
+        const { Captures } = cds.entities;
+        
+        const newCapture = await INSERT.into(Captures).entries({
+            PokemonName,
+            Weight,
+            Height,
+            team_ID: teamId
+        });
+        
+        return newCapture;
+    });
+});
+
     
 
-
-    

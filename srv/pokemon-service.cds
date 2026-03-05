@@ -30,6 +30,15 @@ service PokemonService {
         action setTeamStatus(Active: Boolean) returns Teams;
         function getRandomPokemon() returns Captures;
     };
+    
+    function importPokemon() returns {
+        id     : Integer;
+        name   : String;
+        height : Integer;
+        weight : Integer;
+    };
+
+
     /*
     @restrict: [
         { grant: '*', to: 'Admin' },
@@ -38,8 +47,9 @@ service PokemonService {
     */
     //This tag is for the new entity PokemonSizes no tell cap what is the official
     @cds.redirection.target : true
-    entity Captures as projection on my.Captures;
-
+    entity Captures as projection on my.Captures actions {
+        action capturePokemon(teamId: UUID) returns Captures;
+    };
     /*
     @restrict: [
         { grant: '*', to: 'Admin' },
