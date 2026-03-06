@@ -9,3 +9,6 @@ ID,FirstName,LastName,Email,Birthdate
 66666666-6666-6666-6666-666666666666,Gary,Oak,gary.oak@test.com,2000-10-20
 77777777-7777-7777-7777-777777777777,Dawn,Berlitz,dawn.b@test.com,2001-06-10
 88888888-8888-8888-8888-888888888888,Paul,Shinji,paul.s@test.com,1999-11-05
+aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,Hector,Ruiz,hector@nubexx.com,2000-01-01
+bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,The,User,theuser@nubexx.com,2000-01-01
+cccccccc-cccc-cccc-cccc-cccccccccccc,The,Viewer,theviewer@nubexx.com,2000-01-01

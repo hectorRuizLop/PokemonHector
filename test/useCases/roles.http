@@ -1,0 +1,127 @@
+### getUserConfig
+GET http://localhost:4004/odata/v4/pokemon/getUserConfig()
+Authorization: Basic hector@nubexx.com 123
+
+### EVERYTHING MANAGER
+
+
+### Reed trainer
+GET http://localhost:4004/odata/v4/pokemon/Trainers
+Authorization: Basic hector@nubexx.com 123
+
+### Create trainer
+# @name createTrainer
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+Authorization: Basic hector@nubexx.com 123
+
+{
+    "FirstName": "Ash",
+    "LastName": "Ketchum",
+    "Email": "ash@nubexx.com"
+}
+
+###
+@trainerID = {{createTrainer.response.body.ID}}
+
+### Create team
+# @name createTeam
+POST http://localhost:4004/odata/v4/pokemon/Teams
+Content-Type: application/json
+Authorization: Basic hector@nubexx.com 123
+
+{
+    "Name": "Team Rocket",
+    "Description": "Test team",
+    "trainer_ID": "{{trainerID}}"
+}
+
+###
+@teamID = {{createTeam.response.body.ID}}
+
+### Delete trainer
+DELETE http://localhost:4004/odata/v4/pokemon/Trainers({{trainerID}})
+Authorization: Basic hector@nubexx.com 123
+
+
+### ONLY CREATE TEAMS AND CAPTURES
+
+### READ THEIR OWN TEAMS
+GET http://localhost:4004/odata/v4/pokemon/Trainers
+Authorization: Basic theuser@nubexx.com 123
+
+### CREATE TRAINER, IT SHOULD FAIL
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+Authorization: Basic theuser@nubexx.com 123
+
+{
+    "FirstName": "Misty",
+    "LastName": "Waterflower",
+    "Email": "misty@pokemon.com"
+}
+
+### Capture pokemon
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+Authorization: Basic theuser@nubexx.com 123
+
+{
+    "PokemonName": "Pikachu",
+    "Weight": 6,
+    "Height": 4,
+    "team_ID": "{{teamID}}"
+}
+
+### Delete trainer, it should fail
+DELETE http://localhost:4004/odata/v4/pokemon/Trainers({{trainerID}})
+Authorization: Basic theuser@nubexx.com 123
+
+
+### Viewer only read
+
+### Read trainers
+GET http://localhost:4004/odata/v4/pokemon/Trainers
+Authorization: Basic theviewer@nubexx.com 123
+
+### Create trainer, it should fail
+POST http://localhost:4004/odata/v4/pokemon/Trainers
+Content-Type: application/json
+Authorization: Basic theviewer@nubexx.com 123
+
+{
+    "FirstName": "Brock",
+    "LastName": "Harrison",
+    "Email": "brock@nubexx.com"
+}
+
+### Capture pokemon, it should fail
+POST http://localhost:4004/odata/v4/pokemon/Captures
+Content-Type: application/json
+Authorization: Basic theviewer@nubexx.com 123
+
+{
+    "PokemonName": "Mewtwo",
+    "Weight": 122,
+    "Height": 200,
+    "team_ID": "{{teamID}}"
+}
+
+### Delete trainer, it should fail
+DELETE http://localhost:4004/odata/v4/pokemon/Trainers({{trainerID}})
+Authorization: Basic theviewer@nubexx.com 123
+
+
+### GETUSERCONFIG
+
+### getUserConfig as Manager
+GET http://localhost:4004/odata/v4/pokemon/getUserConfig()
+Authorization: Basic hector@nubexx.com 123
+
+### getUserConfig as User
+GET http://localhost:4004/odata/v4/pokemon/getUserConfig()
+Authorization: Basic theuser@nubexx.com 123
+
+### getUserConfig as Viewer
+GET http://localhost:4004/odata/v4/pokemon/getUserConfig()
+Authorization: Basic theviewer@nubexx.com 123

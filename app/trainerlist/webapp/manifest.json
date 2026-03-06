@@ -54,7 +54,21 @@
           "operationMode": "Server",
           "autoExpandSelect": true
         }
-      }  
+      },
+      "userConfig": {
+          "type": "sap.ui.model.json.JSONModel",
+          "settings": {
+              "data": {
+                  "roleName":   "",
+                  "canCreate":  false,
+                  "canRead":    false,
+                  "canUpdate":  false,
+                  "canDelete":  false,
+                  "canCapture": false,
+                  "canSeeAll":  false
+              }
+          }
+      } 
     },
     "routing": {
     "config": {

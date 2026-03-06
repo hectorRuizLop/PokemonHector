@@ -1,0 +1,4 @@
+ID,roleName,canCreate,canRead,canUpdate,canDelete,canCapture,canSeeAll
+rol-manager,Manager,true,true,true,true,false,true
+rol-user,User,true,true,false,false,true,false
+rol-viewer,Viewer,false,true,false,false,false,true

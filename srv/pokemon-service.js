@@ -70,6 +70,40 @@ module.exports = cds.service.impl(async function() {
         
         return newCapture;
     });
+    this.on('getUserConfig', async (req) => {
+        if (req.user.is('Manager')) {
+            return {
+                roleName:   'Manager',
+                canCreate:  true,
+                canRead:    true,
+                canUpdate:  true,
+                canDelete:  true,
+                canCapture: false,
+                canSeeAll:  true
+            };
+        }
+        if (req.user.is('User')) {
+            return {
+                roleName:   'User',
+                canCreate:  false,
+                canRead:    true,
+                canUpdate:  false,
+                canDelete:  false,
+                canCapture: true,
+                canSeeAll:  false
+            };
+        }
+        // Default → Viewer
+        return {
+            roleName:   'Viewer',
+            canCreate:  false,
+            canRead:    true,
+            canUpdate:  false,
+            canDelete:  false,
+            canCapture: false,
+            canSeeAll:  true
+        };
+    });
 });
 
     

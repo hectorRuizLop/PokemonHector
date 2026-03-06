@@ -61,3 +61,12 @@ entity Gyms : primary {
     location : Location;
 }
 
+entity Roles : cuid {
+    roleName    : String;
+    canCreate   : Boolean default false;
+    canRead     : Boolean default true;
+    canUpdate   : Boolean default false;
+    canDelete   : Boolean default false;
+    canCapture  : Boolean default false;
+    canSeeAll   : Boolean default false;
+}

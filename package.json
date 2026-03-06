@@ -25,28 +25,22 @@
       "auth": {
         "kind": "mocked",
         "users": {
-          "theadmin": {
+          "hector@nubexx.com": {
             "password": "123",
             "roles": [
-              "Admin"
+              "Manager"
             ]
           },
-          "thetrainer": {
+          "theuser@nubexx.com": {
             "password": "123",
             "roles": [
-              "Trainer"
+              "User"
             ]
           },
-          "theviewer": {
+          "theviewer@nubexx.com": {
             "password": "123",
             "roles": [
               "Viewer"
-            ]
-          },
-          "hector": {
-            "password": "123",
-            "roles": [
-              "Admin"
             ]
           }
         }

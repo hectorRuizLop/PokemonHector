@@ -24,13 +24,16 @@
             <OverflowToolbar>
                 <ToolbarSpacer/>
                 <Button text="{i18n>BUTTON_ADD_TEAM}"
-                press=".onAddTeam"/>
+                press=".onAddTeam"
+                visible="{userConfig>/canCreate}"/>
                 <Button
                     text="{i18n>BUTTON_ADD_TRAINER}"
-                    press=".onAddTrainer"/>
+                    press=".onAddTrainer"
+                    visible="{userConfig>/canCreate}"/>
                     <Button
                     text="{i18n>BUTTON_POKEMONS}"
-                    press=".onImportPokemon"/>
+                    press=".onImportPokemon"
+                    visible="{userConfig>/canCapture}"/>
             </OverflowToolbar>
         </footer>
     </Page>
