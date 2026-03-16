@@ -24,7 +24,10 @@ sap.ui.define([
             const oUserConfigModel = this.getModel("userConfig"); 
             const oOperation = oODataModel.bindContext("/getUserConfig(...)");
 
-            oOperation.execute().then(() => {
+            this.rootControlLoaded().then((oRootControl) => {
+                oRootControl.setBusy(true);
+
+                oOperation.execute().then(() => {
                 const oConfig = oOperation.getBoundContext().getObject();
 
                 oUserConfigModel.setData({
@@ -37,7 +40,14 @@ sap.ui.define([
                     canSeeAll:  oConfig.canSeeAll
                 });
 
-            })
+            }).finally(()=> {
+                setTimeout(() => {
+                oRootControl.setBusy(false);
+                }, 5000); 
+                //oRootControl.setBusy(false);
+            
+                });
+            });
         }
     });
 });

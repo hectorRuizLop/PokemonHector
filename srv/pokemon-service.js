@@ -6,7 +6,17 @@ module.exports = cds.service.impl(async function() {
 
     // TRAINERS 
     // Check if the email format is correct and check age
-    this.before('CREATE', 'Trainers', handlers.pokemon.entities.trainers.validateTrainerCreation);
+    this.before('CREATE', 'Trainers', async (req) => {
+        if (req.user.is('User') || req.user.is('Viewer')) {
+            return req.reject(403, 'You dont have permssion to create trainers');
+        }
+
+        if (req.user.is('Manager') && !req.data.Email) {
+            req.data.Email = req.user.id;
+        }
+
+        return handlers.pokemon.entities.trainers.validateTrainerCreation(req);
+    });
     
     // Put the first name of the trainer into upper case
     this.after('READ', 'Trainers', handlers.pokemon.entities.trainers.nameToUppercase);
